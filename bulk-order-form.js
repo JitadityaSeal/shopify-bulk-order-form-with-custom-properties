@@ -108,7 +108,7 @@ class BulkOrderForm extends HTMLElement {
                 if(checkboxElem.checked) checkedValues.push(checkboxElem.value);
             });
             let checkedValuesString = checkedValues.length > 0 ? checkedValues.join(', ') : '';
-            console.log(checkedValues);
+            //console.log(checkedValues);
             event.currentTarget.parentNode.parentNode.querySelector('[name="'+event.currentTarget.dataset.name+'"]').value = checkedValuesString;
           }
         });
