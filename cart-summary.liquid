@@ -1,0 +1,97 @@
+{%- if cart.items.size > 0 -%}
+<style>
+  #shopify-section-cart-summary .cart-summary-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.5); display: none; z-index: -1; justify-content: center; align-items: center; }
+  #shopify-section-cart-summary.active .cart-summary-modal { display: flex; z-index: 99; }
+  .cart-summary-modal p, .cart-summary-modal div, .cart-summary-modal span { line-height: 1.4; }
+  .cart-summary-modal .button { cursor: pointer; display: inline-flex; justify-content: center; align-items: center; padding: 12px 0 15px; text-decoration: none; text-transform: uppercase; border: 0; width: 100%; min-height: 30px; -webkit-appearance: none; appearance: none; background-color: #000; color: #fff; border: 1px solid #000; } 
+  .cart-summary-modal .button:hover { background-color: #fff; color: #000; }
+  .cart-summary-modal .cart-summary { width: 100%; max-width: 600px; background-color: #fff; padding: 20px; position: relative; }
+  .cart-summary-modal .cart-summary .label { font-weight: bold; margin-right: 5px; }
+  .cart-summary-modal .cart-summary .close-cart-summary-modal { padding: 20px; position: absolute; top: 5px; right: 0; }
+  .cart-summary-modal .cart-summary .close-cart-summary-modal svg { width: 20px; height: 20px; } 
+  .cart-summary-modal .cart-summary .cart-heading { font-size: 20px; text-transform: uppercase; padding-bottom: 20px; margin: 0; border-bottom: 1px solid; }
+  .cart-summary-modal .cart-summary .cart-items { margin: 0; max-height: 400px; width: 100%; overflow: auto; }
+  .cart-summary-modal .cart-summary .cart-items .item-block { padding: 15px 0; display: flex; flex-direction: row; flex-wrap: wrap; border-bottom: 1px solid; align-items: center; }
+  .cart-summary-modal .cart-summary .cart-items .item-block p { margin: 0; }
+  .cart-summary-modal .cart-summary .cart-items .item-block .item-title { margin: 0; padding-bottom: 8px; }
+  .cart-summary-modal .cart-summary .cart-items .item-block .item-image-wrapper { width: 30%; padding-right: 10px; }
+  .cart-summary-modal .cart-summary .cart-items .item-block .item-info { width: 67%; padding: 0 10px; }
+  .cart-summary-modal .cart-summary .cart-items .item-block .item-option-with-values { display: flex; }
+  .cart-summary-modal .cart-summary .cart-items .item-block .item-option-with-values > *:not(:last-child) { margin-right: 12px; }
+  .cart-summary-modal .cart-summary .cart-items .item-block .item-qty-and-price { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+  .cart-summary-modal .cart-summary .cart-items .item-block .product-custom-property { word-wrap: break-word; }
+  .cart-summary-modal .cart-summary .cart-count-and-total { text-align: right; margin: 20px 0;}
+  .cart-summary-modal .cart-summary .cart-count-and-total p { margin: 0; background-color: unset; }
+  .cart-summary-modal .cart-summary .cart-buttons { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cart-summary-modal .cart-summary .cart-buttons > * { width: 49%; }
+</style>
+<div class="cart-summary-modal" onclick="if(event.target.classList.contains('cart-summary-modal')) document.querySelector('#shopify-section-cart-summary').remove();">
+<div class="cart-summary">
+  <a href="javascript:void(0);" class="close-cart-summary-modal" onclick="document.querySelector('#shopify-section-cart-summary').remove();"><svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="64.000000pt" height="64.000000pt" viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M3 624 c-4 -11 36 -58 138 -160 l144 -144 -143 -143 c-78 -78 -142 -148 -142 -155 0 -7 7 -15 16 -19 11 -4 58 36 160 138 l144 144 144 -144 c102 -102 149 -142 160 -138 9 4 16 12 16 19 0 7 -64 77 -142 155 l-143 143 144 144 c102 102 142 149 138 160 -4 9 -12 16 -19 16 -7 0 -77 -64 -155 -142 l-143 -143 -143 143 c-78 78 -148 142 -155 142 -7 0 -15 -7 -19 -16z"/></g></svg></a>
+  <div class="cart-summary-inner">
+   <h2 class="cart-heading">Cart Summary</h2>
+   <div class="cart-items">
+   {% for item in cart.items %}
+   <div class="item-block">
+      {%- if item.image -%}
+       <div class="item-image-wrapper">
+        <img
+          class="item-image"
+          src="{{ item.image | img_url: '200x' }}"
+          alt="{{ item.image.alt | escape }}"
+          width="100%"
+        >
+     </div>
+      {%- endif -%}
+      <div class="item-info">
+        <h3 class="item-title">{{ item.product.title | escape }}</h3>
+        <div class="item-qty-and-price">
+          <div class="qty"><span class="label">Qty: </span><span>{{ item.quantity }}</span></div>
+          <div class="price"><span class="label">Price: </span><span>{{ item.price | money }}</span></div>
+        </div>
+        {%- unless item.product.has_only_default_variant -%}
+          <div class="item-option-with-values">
+            {%- for option in item.options_with_values -%}
+              <p><span class="label">{{ option.name }}:</span><span> {{ option.value }}</span></p>
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+        {%- if item.properties != empty -%}
+        <div class="item-properties">
+          {%- for property in item.properties -%}
+          {%- assign property_first_char = property.first | slice: 0 -%}
+          {%- if property.last != blank and property_first_char != '_' -%}
+            <div class="product-custom-property">
+              <span class="label">{{ property.first }}: </span>
+              <span>
+                {%- if property.last contains '/uploads/' -%}
+                <a href="{{ property.last }}" target="_blank">
+                  {{ property.last | split: '/' | last }}
+                </a>
+                {%- else -%}
+                {{ property.last }}
+                {%- endif -%}
+              </span>
+            </div>
+          {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+   {% endfor %}
+   </div>
+   <div class="cart-count-and-total">
+     <p class="cart-count"><span class="label">Total items: </span><span>{{ cart.item_count }}</span></p>
+     <p class="cart-total"><span class="label">Subtotal: </span><span><strong>{{ cart.total_price | money }}</strong></span></p>
+   </div>
+   <div class="cart-buttons">
+     <a href="{{ routes.cart_url }}" class="button">Edit Cart</a>
+     <form action="{{ routes.cart_url }}" method="post">
+       <input type="submit" class="button" name="checkout" value="Checkout" />
+     </form>
+   </div>
+  </div>
+</div>
+</div>
+{%- endif -%}

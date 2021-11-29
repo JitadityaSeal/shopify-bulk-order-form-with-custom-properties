@@ -1,0 +1,127 @@
+{%- assign variant_count = 0 -%}
+<div class="product-variants alt-bg">
+  {%- for variant in product.variants -%}
+  {%- if variant.available -%}
+  {%- assign variant_count = variant_count | plus: 1 -%}
+  <div class="variant-item">
+    <input type="hidden" name="items[][id]" value="{{variant.id}}" />
+    <div class="variant-item-inner columns{% if column_count > 6 %} scroll{% else %} columns-{{column_count}}{% endif %}">
+      {%- if show_variant_image -%}
+      <div class="column">
+        <div class="variant-image-wrapper">
+          <img
+               srcset="{% if variant.image.width >= 240 %}{{ variant.image | img_url: '240x' }} 240w,{% endif %}
+                       {% if variant.image.width >= 300 %}{{ variant.image | img_url: '300x' }} 300w,{% endif %}
+                       {% if variant.image.width >= 400 %}{{ variant.image | img_url: '480x' }} 400w,{% endif %}"
+               src="{{ media.preview_image | img_url: '360x360' }}"
+               sizes="100vw"
+               class="variant-image"
+               width="360"
+               alt="{{ variant.image.alt | escape }}"
+               loading="lazy"
+               />
+        </div>
+      </div>
+      {%- endif -%}
+      <div class="column">
+        {%- if mode != 'product' -%}
+        <p class="product-title">{{product.title}}</p>
+        {%- endif -%}
+        {%- unless show_variants == false -%}
+        {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options -%}
+        <span class="variant-option option-{{forloop.index0}}"><strong class="option-name">{{option | append:':'}}</strong><span class="option-value">{{variant.options[forloop.index0]}}</span></span>
+        {%- endfor -%}
+        {%- endunless -%}
+        {%- endunless -%}
+      </div>
+      <div class="column">
+        <p class="price-area">{%- if variant.compare_at_price > variant.price -%}<del>{{variant.compare_at_price | money}}</del>{%- endif -%}<span>{{variant.price | money}}</span></p>
+      </div>
+      <div class="column">
+        <div class="num-wrapper">
+          <span class="num-change num-minus">-</span>
+          <input class="num-input" type="number" name="items[][quantity]" min="0"{% if variant.inventory_management == 'shopify' and variant.inventory_policy != "continue" %} max="{{variant.inventory_quantity}}"{% endif %} value="0" /> 
+          <span class="num-change num-plus">+</span>
+        </div>
+      </div>
+      {%- if show_properties -%}
+      <div class="column"><a href="javascript:void(0);" class="open-properties-panel" data-open="properties-panel-{{variant.id}}">Add/Edit custom information</a></div>
+      {%- endif -%}
+    </div>
+    {%- if show_properties -%}
+    <div class="properties-panel hidden" data-id="properties-panel-{{variant.id}}">
+      {%- for i in (1..6) -%}
+      {%- capture label -%}bulk_order_property_{{i}}_label{%- endcapture -%}
+      {%- if settings[label] != blank -%}
+      {%- capture type -%}bulk_order_property_{{i}}_type{%- endcapture -%}
+      {%- if settings[type] == 'checkbox' or settings[type] == 'select' -%}
+      {%- capture options -%}bulk_order_property_{{i}}_options{%- endcapture -%}
+      {%- assign field_options = settings[options] | replace: ', ',',' | replace: ' ,', ',' | strip | split: ',' -%}
+      {%- endif -%}
+      {%- case settings[type] -%}
+      {%- when 'text' -%}
+      <div class="property property--{{settings[type]}}">
+        <p class="label">{{settings[label]}}</p>
+        <input type="text" name="items[][properties][{{settings[label]}}]" />
+      </div>
+      {%- when 'number' -%}
+      <div class="property property--{{settings[type]}}">
+        <p class="label">{{settings[label]}}</p>
+        <div class="num-wrapper">
+          <span class="num-change num-minus">-</span>
+          <input class="num-input" type="number" name="items[][properties][{{settings[label]}}]" value="0" /> 
+          <span class="num-change num-plus">+</span>
+        </div>
+      </div>
+      {%- when 'textarea' -%}
+      <div class="property property--{{settings[type]}}">
+        <p class="label">{{settings[label]}}</p>
+        <textarea name="items[][properties][{{settings[label]}}]"></textarea>
+      </div>
+      {%- when 'checkbox' -%}
+      {%- if field_options != empty -%}
+      <div class="property property--{{settings[type]}}">
+        <p class="label">{{settings[label]}}</p>
+        <div class="checkbox-inputs">
+          {% for option in field_options %}
+          <div class="choice-option-wrapper">
+            <input type="checkbox" id="property--{{settings[type]}}-{{forloop.index0}}-{{variant.id}}" name="property-input-checkbox-{{i}}-{{variant.id}}" data-name="items[][properties][{{settings[label]}}]" class="property-input-checkbox" value="{{option}}" /><label for="property--{{settings[type]}}-{{forloop.index0}}-{{variant.id}}">{{option}}</label>
+          </div>
+          {% endfor %}
+          <input type="hidden" name="items[][properties][{{settings[label]}}]" value="" />
+        </div>
+      </div>
+      {%- endif -%}
+      {%- when 'select' -%}
+      {%- if field_options != empty -%}
+      <div class="property property--{{settings[type]}}">
+        <p class="label">{{settings[label]}}</p>
+        <select name="items[][properties][{{settings[label]}}]">
+          <option value="">---</option>
+          {% for option in field_options %}
+          <option value="{{option}}">{{option}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      {%- endif -%}
+      {%- when 'file' -%}
+      <div class="property property--{{settings[type]}}">
+        <p class="label">{{settings[label]}}</p>
+        <input type="file" name="items[][properties][{{settings[label]}}]" />
+      </div>
+      {%- endcase -%}
+      {%- endif -%}
+      {%- endfor -%}
+      {%- if itemIndex == 1 and variant_count == 1 -%}
+      <div class="repeat-for-all"><input type="checkbox" id="repeat-properties" class="repeat-properties" data-panel="properties-panel-{{variant.id}}"/><label for="repeat-properties">Add same custom information for all products</label></div>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+  </div>
+  {%- if show_variants == false-%}
+  	{%- break -%}
+  {%- endif -%}
+  {%- endif -%}
+  {%- endfor -%}
+</div>

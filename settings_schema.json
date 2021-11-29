@@ -1,0 +1,339 @@
+{
+    "name": "Bulk Order Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Custom Properties"
+      },
+      {
+        "type": "paragraph",
+        "content": "PROPERTY 1"
+      },
+      {
+        "type": "text",
+        "id": "bulk_order_property_1_label",
+        "label": "Field label"
+      },
+      {
+        "id": "bulk_order_property_1_type",
+        "type": "select",
+        "options": [
+          {
+            "value": "text",
+            "label": "Text"
+          },
+          {
+            "value": "number",
+            "label": "Number"
+          },
+          {
+            "value": "textarea",
+            "label": "Textarea"
+          },
+          {
+            "value": "checkbox",
+            "label": "Checkbox"
+          },
+          {
+            "value": "select",
+            "label": "Select dropdown"
+          },
+          {
+            "value": "file",
+            "label": "File upload"
+          }
+        ],
+        "default": "text",
+        "label": "Field type",
+        "info": "Enter option values below for select dropdown and checkbox inputs"
+      },
+      {
+        "type": "textarea",
+        "id": "bulk_order_property_1_options",
+        "label": "Field options (for select dropdown and checkbox inputs)",
+        "info": "Enter a comma(,) separated list of options. Ex: Option1,Option2,Option3"
+      },
+      {
+        "type": "paragraph",
+        "content": "PROPERTY 2"
+      },
+      {
+        "type": "text",
+        "id": "bulk_order_property_2_label",
+        "label": "Field label"
+      },
+      {
+        "id": "bulk_order_property_2_type",
+        "type": "select",
+        "options": [
+          {
+            "value": "text",
+            "label": "Text"
+          },
+          {
+            "value": "number",
+            "label": "Number"
+          },
+          {
+            "value": "textarea",
+            "label": "Textarea"
+          },
+          {
+            "value": "checkbox",
+            "label": "Checkbox"
+          },
+          {
+            "value": "select",
+            "label": "Select dropdown"
+          },
+          {
+            "value": "file",
+            "label": "File upload"
+          }
+        ],
+        "default": "text",
+        "label": "Field type",
+        "info": "Enter option values below for select dropdown and checkbox inputs"
+      },
+      {
+        "type": "textarea",
+        "id": "bulk_order_property_2_options",
+        "label": "Field options (for select dropdown and checkbox inputs)",
+        "info": "Enter a comma(,) separated list of options. Ex: Option1,Option2,Option3"
+      },
+      {
+        "type": "paragraph",
+        "content": "PROPERTY 3"
+      },
+      {
+        "type": "text",
+        "id": "bulk_order_property_3_label",
+        "label": "Field label"
+      },
+      {
+        "id": "bulk_order_property_3_type",
+        "type": "select",
+        "options": [
+          {
+            "value": "text",
+            "label": "Text"
+          },
+          {
+            "value": "number",
+            "label": "Number"
+          },
+          {
+            "value": "textarea",
+            "label": "Textarea"
+          },
+          {
+            "value": "checkbox",
+            "label": "Checkbox"
+          },
+          {
+            "value": "select",
+            "label": "Select dropdown"
+          },
+          {
+            "value": "file",
+            "label": "File upload"
+          }
+        ],
+        "default": "text",
+        "label": "Field type",
+        "info": "Enter option values below for select dropdown and checkbox inputs"
+      },
+      {
+        "type": "textarea",
+        "id": "bulk_order_property_3_options",
+        "label": "Field options (for select dropdown and checkbox inputs)",
+        "info": "Enter a comma(,) separated list of options. Ex: Option1,Option2,Option3"
+      },
+      {
+        "type": "paragraph",
+        "content": "PROPERTY 4"
+      },
+      {
+        "type": "text",
+        "id": "bulk_order_property_4_label",
+        "label": "Field label"
+      },
+      {
+        "id": "bulk_order_property_4_type",
+        "type": "select",
+        "options": [
+          {
+            "value": "text",
+            "label": "Text"
+          },
+          {
+            "value": "number",
+            "label": "Number"
+          },
+          {
+            "value": "textarea",
+            "label": "Textarea"
+          },
+          {
+            "value": "checkbox",
+            "label": "Checkbox"
+          },
+          {
+            "value": "select",
+            "label": "Select dropdown"
+          },
+          {
+            "value": "file",
+            "label": "File upload"
+          }
+        ],
+        "default": "text",
+        "label": "Field type",
+        "info": "Enter option values below for select dropdown and checkbox inputs"
+      },
+      {
+        "type": "textarea",
+        "id": "bulk_order_property_4_options",
+        "label": "Field options (for select dropdown and checkbox inputs)",
+        "info": "Enter a comma(,) separated list of options. Ex: Option1,Option2,Option3"
+      },
+      {
+        "type": "paragraph",
+        "content": "PROPERTY 5"
+      },
+      {
+        "type": "text",
+        "id": "bulk_order_property_5_label",
+        "label": "Field label"
+      },
+      {
+        "id": "bulk_order_property_5_type",
+        "type": "select",
+        "options": [
+          {
+            "value": "text",
+            "label": "Text"
+          },
+          {
+            "value": "number",
+            "label": "Number"
+          },
+          {
+            "value": "textarea",
+            "label": "Textarea"
+          },
+          {
+            "value": "checkbox",
+            "label": "Checkbox"
+          },
+          {
+            "value": "select",
+            "label": "Select dropdown"
+          },
+          {
+            "value": "file",
+            "label": "File upload"
+          }
+        ],
+        "default": "text",
+        "label": "Field type",
+        "info": "Enter option values below for select dropdown and checkbox inputs"
+      },
+      {
+        "type": "textarea",
+        "id": "bulk_order_property_5_options",
+        "label": "Field options (for select dropdown and checkbox inputs)",
+        "info": "Enter a comma(,) separated list of options. Ex: Option1,Option2,Option3"
+      },
+      {
+        "type": "paragraph",
+        "content": "PROPERTY 6"
+      },
+      {
+        "type": "text",
+        "id": "bulk_order_property_6_label",
+        "label": "Field label"
+      },
+      {
+        "id": "bulk_order_property_6_type",
+        "type": "select",
+        "options": [
+          {
+            "value": "text",
+            "label": "Text"
+          },
+          {
+            "value": "number",
+            "label": "Number"
+          },
+          {
+            "value": "textarea",
+            "label": "Textarea"
+          },
+          {
+            "value": "checkbox",
+            "label": "Checkbox"
+          },
+          {
+            "value": "select",
+            "label": "Select dropdown"
+          },
+          {
+            "value": "file",
+            "label": "File upload"
+          }
+        ],
+        "default": "text",
+        "label": "Field type",
+        "info": "Enter option values below for select dropdown and checkbox inputs"
+      },
+      {
+        "type": "textarea",
+        "id": "bulk_order_property_6_options",
+        "label": "Field options (for select dropdown and checkbox inputs)",
+        "info": "Enter a comma(,) separated list of options. Ex: Option1,Option2,Option3"
+      },
+      {
+        "type": "header",
+        "content": "Bulk Order Page Settings"
+      },
+      {
+        "type": "collection",
+        "id": "bulk_order_page_collection",
+        "label": "Choose collection",
+        "info": "Products of this collection will appear in bulk order form"
+      },
+      {
+        "id": "bulk_order_page_product_count",
+        "type": "range",
+        "min": 2,
+        "max": 50,
+        "step": 1,
+        "default": 20,
+        "label": "Total number of products to show"
+      },
+      {
+        "type": "checkbox",
+        "id": "bulk_order_page_show_variants",
+        "label": "Show variants",
+        "info": "Uncheck this to hide product variants.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "bulk_order_page_show_image",
+        "label": "Show image",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Product page Bulk Order Form Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "bulk_order_product_show_image",
+        "label": "Show image",
+        "default": true
+      }
+    ]
+  }

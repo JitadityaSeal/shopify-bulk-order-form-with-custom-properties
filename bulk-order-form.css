@@ -1,0 +1,49 @@
+/*
+ * Shopify Bulk Order Form With Custom Properties
+ *
+ * Copyright (c) 2021 Jitaditya Seal (jitadityaseal.developer@gmail.com)
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ */ 
+.bulk-order-form { width: 100%; }
+.bulk-order-form .columns { display: flex; flex-direction: row; }
+.bulk-order-form .columns .column { width: 200px; padding: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; text-align: center; }
+.bulk-order-form .columns .column:not(:last-child) { border-right: 1px solid #acacac; }
+.bulk-order-form .columns.columns-2 .column { width: calc(100% / 2); }
+.bulk-order-form .columns.columns-3 .column { width: calc(100% / 3); }
+.bulk-order-form .columns.columns-4 .column { width: calc(100% / 4); }
+.bulk-order-form .columns.columns-5 .column { width: calc(100% / 5); }
+.bulk-order-form form { display: flex; flex-direction: column; }
+.bulk-order-form .product-variants { width: 100%; overflow-x: auto; border: 1px solid #acacac; }
+.bulk-order-form .product-variants.alt-bg .variant-item:not(:last-child){ border-bottom: 1px solid #acacac; }
+.bulk-order-form .product-variants.alt-bg .variant-item:nth-child(2n+1) { background-color: #cccccc1f; }
+.bulk-order-form .product-variants.alt-bg .variant-item .product-title { margin: 0; text-transform: uppercase; color: rgba(26,27,24,0.75); }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel { border-top: 1px solid #acacac; padding: 30px 35px; }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel .property:not(:last-child) { margin-bottom: 35px; }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel .property .label { margin: 0 0 10px 0; line-height: 1; font-weight: bold; }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel .property--text input { width: 100%; padding: 6px; background-color: #fff; border: 1px solid #acacac; }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel .property--select select { width: 100%; padding: 6px; appearance: none; -webkit-appearance: none; -moz-appearance: none; background-color: #fff; border: 1px solid #acacac; }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel .choice-option-wrapper { display: flex; }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel input[type="checkbox"] { display: inline-block; width: auto; margin-right: .5rem; }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel .property--textarea textarea { width: 100%; height: 100px; }
+.bulk-order-form .product-variants.alt-bg .variant-item .properties-panel label, .bulk-order-form .product-variants.alt-bg .variant-item .properties-panel input, .bulk-order-form .variant-option .option-value { color: rgba(26,27,24,.75); }
+.bulk-order-form .variant-image-wrapper { padding: 0; max-width: 140px; }
+.bulk-order-form .variant-image-wrapper .variant-image { max-width: 100%; }
+.bulk-order-form .variant-option { margin-right: 10px; }
+.bulk-order-form .variant-option .option-name { margin-right: 3px; color: rgba(26,27,24,.75); }
+.bulk-order-form .price-area del { margin-right: 10px; }
+.bulk-order-form .num-wrapper { display: inline-flex; border: 1px solid; border-radius: 6px; }
+.bulk-order-form .num-wrapper input[type="number"] { display: inline-flex; margin: 0; background-color: transparent; width: 40px; text-align: center; align-items: center; justify-content: center; border: none; -moz-appearance: textfield; -webkit-appearance: textfield; appearance: textfield; }
+.bulk-order-form .num-wrapper input[type="number"]::-webkit-inner-spin-button { appearance: none; -webkit-appearance: none; -moz-appearance: none; }
+.bulk-order-form .num-wrapper .num-change { cursor: pointer; width: 40px; height: 35px; display: inline-flex; justify-content: center; align-items: center; font-size: 22px; padding-bottom: 5px; }
+.bulk-order-form [type="submit"] { cursor: pointer; display: inline-flex; justify-content: center; align-items: center; padding: 12px 20px; text-decoration: none; text-transform: uppercase; min-height: 30px; background-color: #000; color: #fff; border: 1px solid #000; float: right; margin-top: 20px; margin-left: auto; width: 170px; }
+.bulk-order-form [type="submit"]:hover { background-color: #fff; color: #000; }
+.bulk-order-form [type="submit"].button-top { margin-bottom: 20px; order: -1; }
+/*---Mobile layout---*/
+.bulk-order-form.mobile-layout .columns { flex-direction: column; }
+.bulk-order-form.mobile-layout .columns.columns-2 .column, .bulk-order-form .columns.columns-3 .column, .bulk-order-form .columns.columns-4 .column, .bulk-order-form .columns.columns-5 .column { width: 100%; }
+.bulk-order-form.mobile-layout .columns .column { justify-content: left; align-items: flex-start; flex-direction: column; padding: 15px; border-right: none; }
+.bulk-order-form.mobile-layout .columns .column:not(:last-child) { padding-bottom: 0; border-right: none; }
+.bulk-order-form.mobile-layout .columns .column > * { margin: 0; }
+.bulk-order-form.mobile-layout .product-variants.alt-bg .variant-item .properties-panel { padding: 15px; }

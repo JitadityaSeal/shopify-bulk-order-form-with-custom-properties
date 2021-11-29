@@ -1,0 +1,18 @@
+<style>
+    .page-container { width: 94%; max-width: 1200px; margin: 0 auto; }
+  </style>
+  <div class="page-container">
+    <h1 class="page-title">
+      {{ page.title | escape }}
+    </h1>
+    <div class="page-content">
+      {{ page.content }}
+    </div>
+    {%- render 'bulk-order-form' -%}
+  </div>
+  {% schema %}
+    {
+      "name": "Bulk Order Page",
+      "settings": []
+    }
+  {% endschema %}

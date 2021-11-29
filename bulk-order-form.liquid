@@ -1,0 +1,56 @@
+{%- comment -%}
+/*
+ * Shopify Bulk Order Form With Custom Properties
+ *
+ * Copyright (c) 2021 Jitaditya Seal (jitadityaseal.developer@gmail.com)
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ */ 
+{%- endcomment -%}
+{%- assign collection_handle = settings.bulk_order_page_collection -%}
+{%- if product or collection_handle != blank -%}
+{{ 'bulk-order-form.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'bulk-order-form.js' | asset_url }}" defer="defer"></script>
+{%- assign column_count = 3 -%}
+{%- assign mobile_width_in_px = 767 -%}
+{%- assign show_variant_image = false -%}
+{%- if product -%}
+  {%- if settings.bulk_order_product_show_image -%}
+     {%- assign show_variant_image = true -%} 	
+  {%- endif -%}
+{%- else -%}
+  {%- if settings.bulk_order_page_show_image -%}
+     {%- assign show_variant_image = true -%}  
+  {%- endif -%}
+{%- endif -%}
+{%- if show_variant_image -%}
+  {%- assign column_count = column_count | plus: 1 -%}
+{%- endif -%}  
+{%- assign show_properties = false -%}
+{%- for i in (1..6) -%}
+  {%- capture label -%}bulk_order_property_{{i}}_label{%- endcapture -%}
+  {%- if settings[label] != blank -%}
+    {%- assign show_properties = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if show_properties -%}
+  {%- assign column_count = column_count | plus: 1 -%}
+{%- endif -%}
+<bulk-order-form class="bulk-order-form" data-min-container-width="{{mobile_width_in_px}}">
+  <form action="/cart/add" method="POST" class="ajax-submit" enctype="multipart/form-data">
+    {%- if product -%}
+      {%- render 'bulk-order-product-item', mode: 'product', product: product, column_count: column_count, show_variant_image: show_variant_image, show_properties: show_properties, itemIndex: 1 -%}
+    {%- else -%}
+      {%- if collection_handle != blank -%}
+        {%- for product in collections[collection_handle].products limit: settings.bulk_order_page_product_count -%}
+    	  {%- render 'bulk-order-product-item', product: product, column_count: column_count, show_variants: settings.bulk_order_page_show_variants, show_variant_image: show_variant_image, show_properties: show_properties, itemIndex: forloop.index -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endif -%}
+    <input type="submit" value="Add To Cart" data-text-atc="Add To Cart" data-text-adding="Adding..."/>
+    <input type="submit" class="button-top" value="Add To Cart" data-text-atc="Add To Cart" data-text-adding="Adding..."/>
+  </form>
+</bulk-order-form>
+{%- endif -%}
